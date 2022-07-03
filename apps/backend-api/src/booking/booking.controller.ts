@@ -81,7 +81,8 @@ export class BookingController {
             throw new BadRequestException('Cannot make bookings on Saturday Sunday.');
         }
         const dth = parseInt(body.book_dt.substr(11));
-        if( dth < 9 || dth >= 18 ){
+        console.log(dth);
+        if( dth < 9 || dth >= 18 || isNaN(dth) ){
             throw new BadRequestException('Booking can be made from 9am - 6pm only .');
         }
 

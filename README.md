@@ -1,7 +1,10 @@
 # BookingSys
 
-1. Install Docker.
-2. Run "docker-compose up" to setup the containers. It will take awhile for the setup and installing the packages.
+1. Go to apps/backend-api and run "npm install" 
+2. Go to apps/client-admin and run "npm install" 
+3. Go to apps/client-form and run "npm install" 
+4. Install Docker.
+5. Run "docker-compose up" to setup the containers. It will take awhile for the setup and installing the packages.
 
 backend-api - uses nestjs and mysql. 
 http://localhost:8000 

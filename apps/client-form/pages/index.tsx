@@ -50,6 +50,12 @@ export default function Home() {
   const [book_time, setBookTime] = useState('');
   const [timeslots, setTimeslots] = useState('');
 
+  const [err_first_name, setErrFirstName] = useState('');
+  const [err_last_name, setErrLastName] = useState('');
+  const [err_email, setErrEmail] = useState('');
+  const [err_book_date, setErrBookDate] = useState('');
+  const [err_book_time, setErrBookTime] = useState('');
+
   const [first_name, setFirstName] = useState('');
   const [last_name, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -87,6 +93,25 @@ export default function Home() {
 
   const submit = async(e:SyntheticEvent) => {
     e.preventDefault();
+    
+
+    let allgood = true;
+    if( first_name == "" ) {setErrFirstName("is-invalid"); allgood = false;}
+    else setErrFirstName('');
+
+    if( last_name == "" ) {setErrLastName("is-invalid");allgood = false;}
+    else setErrLastName('');
+
+    if( email == "" ) {setErrEmail("is-invalid");allgood = false;}
+    else setErrEmail('');
+
+    if( book_date == "" ) {setErrBookDate("is-invalid");allgood = false;}
+    else setErrBookDate('');
+
+    if( book_time == "" ) {setErrBookTime("is-invalid");allgood = false;}
+    else setErrBookTime('');
+
+    if( !allgood ) return;
 
     try{
       const {data} = await axios.post(`${constants.endpoint}bookings`,{
@@ -140,6 +165,15 @@ export default function Home() {
     )
 }
 
+const getCSSClass = ( v ) => {
+
+  if( v == "" ) {
+    return "form-control";
+  }else{
+    return "form-control is-invalid"
+  }
+
+}
 
   return (
     <>
@@ -166,7 +200,7 @@ export default function Home() {
           <div className="row g-3">
             <div className="col-sm-6">
               <label htmlFor="firstName" className="form-label">First name</label>
-              <input type="text" className="form-control" id="firstName" placeholder="" required onChangeCapture={e => setFirstName(e.target.value)}/>
+              <input type="text" className={getCSSClass(err_first_name)} id="firstName" placeholder="" onChangeCapture={e => setFirstName(e.target.value)}/>
               <div className="invalid-feedback">
                 Valid first name is required.
               </div>
@@ -174,7 +208,7 @@ export default function Home() {
 
             <div className="col-sm-6">
               <label htmlFor="lastName" className="form-label">Last name</label>
-              <input type="text" className="form-control" id="lastName" placeholder="" required onChangeCapture={e => setLastName(e.target.value)}/>
+              <input type="text" className={getCSSClass(err_last_name)} id="lastName" placeholder="" onChangeCapture={e => setLastName(e.target.value)}/>
               <div className="invalid-feedback">
                 Valid last name is required.
               </div>
@@ -182,16 +216,16 @@ export default function Home() {
 
             <div className="col-12">
               <label htmlFor="email" className="form-label">Email</label>
-              <input type="email" className="form-control" id="email" placeholder="you@example.com" required onChangeCapture={e => setEmail(e.target.value)}/>
+              <input type="email" className={getCSSClass(err_email)} id="email" placeholder="you@example.com" onChangeCapture={e => setEmail(e.target.value)}/>
               <div className="invalid-feedback">
-                Please enter a valid email address for shipping updates.
+              Valid email is required.
               </div>
             </div>
 
             <div className="col-12">
               <label htmlFor="email" className="form-label">Date</label>
               <ReactDatePicker
-              className="form-control"
+              className={getCSSClass(err_book_date)}
               dateFormat="yyyy-MM-dd"
       selected={ selcted_date }
       minDate={sdt}
@@ -203,18 +237,18 @@ export default function Home() {
 
 
               <div className="invalid-feedback">
-                Please enter a valid email address for shipping updates.
+                Please select a date between Monday and Friday.
               </div>
             </div>
             <div className="col-12">
               <label htmlFor="email" className="form-label">Time</label>
               
-<select className="form-control" onChangeCapture={e => setBookTime(e.target.value)}>
+<select className={getCSSClass(err_book_time)} onChangeCapture={e => setBookTime(e.target.value)}>
 <option selected>Select Time</option>
 {HTMLReactParser(timeslots)}
 </select>
               <div className="invalid-feedback">
-                Please enter a valid email address for shipping updates.
+                Please select a time slot between 9 AM to 5 PM.
               </div>
             </div>
             
