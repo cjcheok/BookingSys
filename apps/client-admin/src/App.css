@@ -1,0 +1,30 @@
+
+.nav-link{
+    display: inline-block !important;
+}
+
+.react-datepicker__input-container .form-control{
+    padding:1rem .75rem;
+    padding-top:1.625rem;
+    padding-bottom:.625rem;
+    height: calc(3.5rem + 2px);
+    line-height: 1.5;
+}
+
+.form-floating label{
+    opacity:.65;
+    transform:scale(.85) translateY(-.5rem) translateX(.15rem);
+}
+
+.hidethis{
+    display: none;
+}
+
+option[disabled]{
+    color: #ccc;
+    background-color: #eee;
+}
+.table-responsive,  
+main{
+    min-height: 50vh;
+}
