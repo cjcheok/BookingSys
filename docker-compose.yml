@@ -1,0 +1,53 @@
+version: "3.8"
+
+
+services:
+  backend-api:
+    container_name: backend-api
+    build:
+      context: ./
+      dockerfile: ./apps/backend-api/Dockerfile
+    ports:
+      - 8000:3000
+    volumes:
+      - ./apps/backend-api:/app
+    depends_on:
+      - db
+
+  client-admin:
+    container_name: client-admin
+    build:
+      context: ./
+      dockerfile: ./apps/client-admin/Dockerfile
+    ports:
+      - 5000:3000
+    volumes:
+      - ./apps/client-admin:/app
+
+  client-form:
+    container_name: client-form
+    build:
+      context: ./
+      dockerfile: ./apps/client-form/Dockerfile
+    ports:
+      - 4000:2222
+    volumes:
+      - ./apps/client-form:/app
+
+  db:
+    image: mysql:5.7.22
+    restart: always
+    environment:
+      MYSQL_DATABASE: booking_db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - .dbdata:/var/lib/mysql
+    ports:
+      - 33067:3306
+
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
