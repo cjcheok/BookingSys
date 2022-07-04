@@ -6,14 +6,7 @@ import { EventEmitter2 } from '@nestjs/event-emitter';
 import { Request } from 'express';
 import { Booking } from './booking';
 import { AuthGuard } from 'src/auth/auth.guard';
-
-@Injectable()
-class HttpCacheInterceptor extends CacheInterceptor {
-  trackBy(context: ExecutionContext): string | undefined {
-    return 'key';
-  }
-}
-
+import { HttpCacheInterceptor } from 'src/HttpCacheInterceptor';
 
 @Controller()
 export class BookingController {
@@ -51,15 +44,13 @@ export class BookingController {
     @Get(['bookings'])
     async all(
         @Req() request: Request
-
     ){
-        // disable the cache, UseInterceptors doesnt seems to work with redis cache.
         //await this.cacheManager.del('bookings');
-        //let bookings = await this.cacheManager.get<Booking[]>('bookings');
-        //if( !bookings ){
-            let bookings = await this.bookingService.find();
-            //await this.cacheManager.set( 'bookings', bookings, {ttl:1800 } );
-        //}
+        let bookings = await this.cacheManager.get<Booking[]>('bookings');
+        if( !bookings ){
+            bookings = await this.bookingService.find();
+            await this.cacheManager.set( 'bookings', bookings, {ttl:1800 } );
+        }
         if( request.query.dt ){
             const dt = request.query.dt.toString();
             bookings = bookings.filter( b => b.book_dt.indexOf(dt) >= 0 );

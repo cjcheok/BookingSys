@@ -16,13 +16,13 @@ export default function Home() {
 
       </Head>
       <div className="container">
-  <main>
-    <div className="py-5 text-center">
-      <h2>Booking form</h2>
-      <p className="lead">Your booking is successful!</p>
-    </div>
-    
-  </main>
+        <main>
+          <div className="py-5 text-center">
+            <h2>Booking form</h2>
+            <p className="lead">Your booking is successful!</p>
+          </div>
+          
+        </main>
       </div>
     </>
   )
