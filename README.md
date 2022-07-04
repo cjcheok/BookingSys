@@ -31,6 +31,8 @@ Current Booking Rules,
 3. Booking can be made 2 business day in advance, and not more than 3 weeks.
 4. Only weekdays (Monday - Friday).
 
+-------------------------------------------------------------------
+
 Can be implemented in future.
 1. Adding email notifications.
 2. Emails with options to add to calendar, modify booking links.
