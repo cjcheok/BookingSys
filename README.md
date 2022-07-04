@@ -20,7 +20,7 @@
 
 -------------------------------------------------------------------
 
-- client-form - uses nestjs 
+- client-form - uses nextjs 
 - http://localhost:4000 - For Public to make bookings.
 
 -------------------------------------------------------------------
