@@ -6,16 +6,16 @@
 4. Install Docker.
 5. Run "docker-compose up" to setup the containers. It will take awhile for the setup and installing the packages.
 
-backend-api - uses nestjs and mysql. 
-http://localhost:8000 
+- backend-api - uses nestjs and mysql. 
+- http://localhost:8000 
 
-client-admin - uses reactjs 
-@ http://localhost:5000 - Edit / Delete Bookings. 
-@ http://localhost:5000/login - login to view bookings. 
-@ http://localhost:5000/register - to create admin 
+- client-admin - uses reactjs 
+- http://localhost:5000 - Edit / Delete Bookings. 
+- http://localhost:5000/login - login to view bookings. 
+- http://localhost:5000/register - to create admin 
 
-client-form - uses nestjs 
-@ http://localhost:4000 - For Public to make bookings.
+- client-form - uses nestjs 
+- http://localhost:4000 - For Public to make bookings.
 
 Current Booking Rules,
 1. Each session are 1 hour, Meaning there's 9 sessions max in a day.
